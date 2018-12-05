@@ -29,12 +29,15 @@
                     <p>{{ post.content | linebreaksbr }}</p>
                     <p><span class="boldtext">Published on:</span> {{ post.published_date }} </p>
                     <p><span class="boldtext">Views:</span> {{ post.views }}</p>
-                    <p><span class="boldtext">Tag:</span> 
+
+                    {% if post.taglist|length > 0 %}
+                    <p><span class="boldtext">Tags:</span> 
                     
                     {% for tag in post.taglist %}
                     <a href="{% url 'posts_by_tag' tag %}">{{ tag }}</a>
                     {% endfor %}
                     </p>
+                    {% endif %}
 
                     <a href="{% url 'index' %}" class="btn btn-default">Back to Blog</a>
                     

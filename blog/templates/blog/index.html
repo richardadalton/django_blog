@@ -24,10 +24,12 @@
                         <p><a href="{% url 'read_post' post.id %}"  class="btn btn-default">Read more</a></p>
                         <p><span class="boldtext">Published on:</span> {{ post.published_date }} </p>
                         <p><span class="boldtext">Views:</span> {{ post.views }}</p>
-                        <p><span class="boldtext">Tag:</span>
+                        {% if post.taglist|length > 0 %}
+                        <p><span class="boldtext">Tags:</span>
                         {% for tag in post.taglist %}
                         <a href="{% url 'posts_by_tag' tag %}">{{ tag }}</a>
                         {% endfor %}
+                        {% endif %}
                         </p>
                     </div>
                 </div>
