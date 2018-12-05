@@ -5,6 +5,7 @@ from .models import Post
 from .forms import PostForm
 from django.contrib.auth.decorators import permission_required
 
+
 def is_in_group(user, group_name):
     return user.groups.filter(name=group_name).exists()
 
@@ -16,12 +17,15 @@ def user_can_edit_post(request, post):
     return wrote_the_post or superuser or is_editor
 
 
-
 # Create your views here.
 def get_index(request):
     posts = Post.objects.filter(published_date__lte = timezone.now())
     return render(request, "blog/index.html", {'posts': posts})
     
+  
+def get_posts_by_tag(request, tag):
+    posts = Post.objects.filter(tags__icontains=tag)
+    return render(request, "blog/index.html", {'posts': posts})
     
 def read_post(request, id):
     post = Post.objects.get(pk=id)
@@ -41,6 +45,7 @@ def read_post(request, id):
 def write_post(request):
     if request.method=="POST":
         form = PostForm(request.POST, request.FILES)
+        print(request.POST['tags'])
         post = form.save(commit=False)
         post.author = request.user
         post.save()
