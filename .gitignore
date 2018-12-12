@@ -1,2 +1,6 @@
 media/
 db.sqlite3
+.idea
+venv
+__pycache__
+django_blog/settings/.env
