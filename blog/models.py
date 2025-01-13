@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -17,11 +19,17 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
-    published_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(User, related_name='posts', null=False, default=1, on_delete=models.SET_DEFAULT)
     views = models.IntegerField(default=0)
     image = models.ImageField(upload_to="images", null=True, blank=True)
     tags = models.CharField(max_length=255, null=True, blank=True)
+
+    @property
+    def is_published(self):
+        if self.published_date:
+            return timezone.now() > self.published_date
+        return False
 
     @property
     def taglist(self):

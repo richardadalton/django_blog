@@ -69,7 +69,7 @@ def edit_post(request, id):
 
 @permission_required('blog.can_publish')
 def get_unpublished_posts(request):
-    posts = Post.objects.filter(published_date__gte=timezone.now())
+    posts = Post.objects.filter(published_date__isnull=True)
     return render(request, "blog/index.html", {'posts': posts})
 
 

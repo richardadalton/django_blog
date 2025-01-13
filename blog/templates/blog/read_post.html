@@ -8,8 +8,6 @@
 
 
 {% block content %}
-
-
     <div class="row">
         <div class="col-md-2 col-sm-3 text-center">
             <a class="story-img" href="#">
@@ -45,7 +43,7 @@
                     <a href="{% url 'edit_post' post.id %}" class="btn btn-default">Edit Post</a>
                     {% endif %}
 
-                    {% if perms.blog.can_publish %}
+                    {% if perms.blog.can_publish and not post.is_published %}
                     <a href="{% url 'publish_post' post.id %}" class="btn btn-default">Publish Post</a>
                     {% endif %}
 

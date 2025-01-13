@@ -40,6 +40,9 @@
                     {% endif %}
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>
+                        {% if perms.blog.publish_post %}
+                        <li><a href="{% url 'get_unpublished_posts' %}"><i class="fa fa-newspaper-o"></i> Unpublished Post</a></li>
+                        {% endif %}
                         {% if perms.blog.add_post %}
                         <li><a href="{% url 'write_post' %}"><i class="fa fa-plus"></i> New Post</a></li>
                         {% endif %}
@@ -79,7 +82,7 @@
     </div>
     <footer>
         <div class="container">
-            <p>Copyright ©2024 Devjoy Ltd.</p>
+            <p>Copyright ©2025 Devjoy Ltd.</p>
         </div>
     </footer>
 
