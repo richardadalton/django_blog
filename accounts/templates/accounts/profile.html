@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+
+{% block content %}
+<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    <p>{{ user.email }}</p>
+<img src="{{ MEDIA_URL }}{{ user.profile.image }}" class="img-circle">
+
+{% endblock %}
